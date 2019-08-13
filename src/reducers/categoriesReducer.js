@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
          case REMOVE_CATEGORY_CLICKED: 
             return {...state, isRemoveCategoryClicked: !state.isRemoveCategoryClicked}
          case DELETE_CATEGORY:
-            return {...state, categories: action.payload }      
+            return {...state, categories: action.payload }        
         default:
             return state;    
 

@@ -1,6 +1,6 @@
 import {LOCATION_TEXT_CHANGED, ADDRESS_TEXT_CHANGED, CATEGORY_SLIDER_CHANGED,
      FETCH_LOCATIONS, ADD_LOCATION, CHECKBOX_CLICKED, LOCATION_FILER_BY_CATEGORY,
-     REMOVE_LOCATION_CLICKED, DELETE_LOCATION }
+     REMOVE_LOCATION_CLICKED, DELETE_LOCATION, COORD_BY_DRAG }
       from '../actions/types';
 
  export const fetchLocations = ()  => {
@@ -10,10 +10,10 @@ import {LOCATION_TEXT_CHANGED, ADDRESS_TEXT_CHANGED, CATEGORY_SLIDER_CHANGED,
     return { type: FETCH_LOCATIONS, payload: locations };
 }
 
-export const addLocation = (name, address, category, callback) => dispatch => {
+export const addLocation = (name, address, category, coordByDrag,  callback) => dispatch => {
     let locations = localStorage.getItem('locations');
     locations = locations ? JSON.parse(locations) : {};
-    locations[name] = { name, address, category };
+    locations[name] = { name, address, category, coordByDrag };
     localStorage.setItem('locations', JSON.stringify(locations));
 
     dispatch({ type: ADD_LOCATION, payload: locations});
@@ -57,4 +57,12 @@ export const deleteLocation = (name) => {
     localStorage.setItem('locations', JSON.stringify(locations));
 
     return {type: DELETE_LOCATION, payload: locations};
+}
+
+export const onDragendComplete = (coord) => {
+    const { latLng } = coord;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+
+    return { type: COORD_BY_DRAG, payload: {lat, lng}};
 }

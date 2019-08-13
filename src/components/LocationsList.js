@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Input from '@material-ui/core/Input';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FilledInput from '@material-ui/core/FilledInput';
@@ -42,8 +43,10 @@ class LocationsList extends Component {
   }
 
   renderListItem(location) {
-    return (
-        <ListItem>
+    return ( 
+        <ListItem
+        component={Link} to={`/locations/${location.name}`}
+        >
         <ListItemAvatar>
             <Avatar>
                 <FolderIcon />
@@ -61,7 +64,8 @@ class LocationsList extends Component {
         </ListItemSecondaryAction>
     </ListItem>
     );
-}
+  }
+
 
   render() {
     const {classes, isCheckBoxClicked, filterCategoryValue, categoriesNames } = this.props;
