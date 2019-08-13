@@ -10,36 +10,32 @@ import { onCategoryTextChanged, addCategory } from '../actions';
 
 class AddCategory extends Component {
     render() {
-        const { classes, categoryToAdd } = this.props;
+        const { classes, categoryName } = this.props;
         return (
-            <Grid container spacing={1} direction="column">
+            <Grid container spacing={1} direction="column" alignContent="center" alignSelf="center">
             <div style= {{padding: '20px'}}>
                 <Typography variant="h4" component="h2">
-                    Add Category:
+                    Add Category
                  </Typography>
             </div>
-                <Grid item xs={15}>
                     <TextField
-                        id="filled-name"
+                        id="outlined-name"
                         label="Category Name"
                         className={classes.textField}
-                        value={categoryToAdd}
+                        value={categoryName}
                         onChange={event => this.props.onCategoryTextChanged(event.target.value)}
                         margin="normal"
-                        variant="filled"
+                        variant="outlined"
                     />
-                </Grid>
-                <Grid item xs={15}>
                     <Button 
                     variant="contained" 
                     color="primary" 
                     className={classes.button}
-                    disabled={!categoryToAdd}
-                    onClick={() => this.props.addCategory(categoryToAdd, () => this.props.history.push('/categories'))}
+                    disabled={!categoryName}
+                    onClick={() => this.props.addCategory(categoryName, () => this.props.history.push('/categories'))}
                     >
-                        Add
+                        Submit
                     </Button>
-                </Grid>
             </Grid>
     );
     }
@@ -62,7 +58,7 @@ const styles = theme => ({
   });
 
   const mapStateToProps = ({categories}) => {
-      return {categoryToAdd: categories.categoryToAdd};
+      return {categoryName: categories.categoryToAdd};
   }
 
 export default connect(mapStateToProps, {onCategoryTextChanged, addCategory})

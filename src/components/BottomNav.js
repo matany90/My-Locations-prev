@@ -1,34 +1,54 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import CategoryIcon from '@material-ui/icons/Category';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import { Link } from 'react-router-dom'; 
 
 class BottomNav extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <BottomNavigation
-              value={"1"}
-              onChange={() => console.log('111')}
-              showLabels
-              className={classes.stickToBottom}
-            >
-              <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-              <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-            </BottomNavigation>
-          );
-    }
+          <AppBar position="fixed" color="primary" className={classes.appBar}>
+            <Toolbar>
+              <Button
+                color="inherit"
+                component={Link}
+                className={classes.button}
+                to="/categories">
+                <CategoryIcon className={classes.extendedIcon} />
+                Categories
+                </Button>
+              <Button
+                color="inherit"
+                component={Link}
+                to="/locations"
+                className={classes.button}
+              >
+                <LocationOnIcon className={classes.extendedIcon} />
+                Locations
+                </Button>
+            </Toolbar>
+          </AppBar>
+            )}
 }
 
 const styles = theme => ({
-    stickToBottom: {
-        bottom: 0,
-        position: 'fixed',
-        width: '100%',
-      },
+  appBar: {
+    top: 'auto',
+    bottom: 0,
+  },
+  button: {
+    margin: '0 auto',
+  },
+  button: {
+    margin: '0 auto',
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
   });
 
 export default withStyles(styles)(BottomNav);

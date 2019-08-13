@@ -6,14 +6,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
 import _ from 'lodash';
 
 class CategoriesList extends Component {
-    componentDidMount() {
-        this.props.fetchCategories();
-    }
-
     renderCategories = () => {
         const { classes, categories } = this.props;
         if (_.isEmpty(this.props.categories)) {
@@ -39,9 +36,11 @@ class CategoriesList extends Component {
   render() {
     return (
         <div style={{padding: '20px'}}>
-        <Grid container spacing={2} direction="column">
+        <Grid container spacing={2} direction="column" alignSelf="center" alignContent="center">
             <Typography variant="h4" component="h2">
-            My Categories:
+            <Box letterSpacing={6} m={1} fontStyle="oblique" fontWeight="fontWeightBold">
+            My Categories
+            </Box>
             </Typography>
             {this.renderCategories()}
         </Grid>
@@ -61,7 +60,8 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     const {categories} = state.categories;
+
     return { categories }
 }
 
-export default connect(mapStateToProps, { fetchCategories })(withStyles(styles)(CategoriesList));
+export default connect(mapStateToProps)(withStyles(styles)(CategoriesList));

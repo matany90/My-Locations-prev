@@ -27,8 +27,18 @@ class Header extends Component {
             case "locations":
             return (
                 <div>
-                    <Button color="inherit">Add Location</Button>
-                    <Button color="inherit">Remove Location</Button>
+                    <Button 
+                    color="inherit"
+                    component = {Link}
+                    to = "/locations/addLocation"
+                    >
+                    Add Location
+                    </Button>
+                    <Button 
+                    color="inherit"
+                    >
+                    Remove Location
+                    </Button>
                 </div>    
             );
             default: 
