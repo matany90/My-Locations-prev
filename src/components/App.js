@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { fetchCategories, fetchLocations } from '../actions';
 import { connect } from 'react-redux';
 

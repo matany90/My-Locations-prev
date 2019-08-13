@@ -61,5 +61,4 @@ const styles = theme => ({
       return {categoryName: categories.categoryToAdd};
   }
 
-export default connect(mapStateToProps, {onCategoryTextChanged, addCategory})
-(withStyles(styles)(AddCategory));
+export default connect(mapStateToProps, {onCategoryTextChanged, addCategory})(withStyles(styles)(AddCategory));

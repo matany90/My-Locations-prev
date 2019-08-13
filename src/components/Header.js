@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Link } from 'react-router-dom'; 
+import { connect } from 'react-redux';
+import { onRemoveCategoryClick, onRemoveLocationClick } from '../actions';
 
 class Header extends Component {
     renderContent = () => {
@@ -21,7 +23,12 @@ class Header extends Component {
                         >
                         Add Category
                         </Button>
-                        <Button color="inherit">Remove Category</Button>
+                        <Button 
+                         color="inherit"
+                        onClick={() => this.props.onRemoveCategoryClick()}
+                        >
+                        Remove Category
+                        </Button>
                     </div>    
                 );
             case "locations":
@@ -36,6 +43,7 @@ class Header extends Component {
                     </Button>
                     <Button 
                     color="inherit"
+                    onClick={() => this.props.onRemoveLocationClick()}
                     >
                     Remove Location
                     </Button>
@@ -75,5 +83,5 @@ const styles = theme => ({
     },
   });
 
-export default withRouter(withStyles(styles)(Header));
+export default connect(null, {onRemoveCategoryClick, onRemoveLocationClick})(withRouter(withStyles(styles)(Header)));
 /*export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));*/

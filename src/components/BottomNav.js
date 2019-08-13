@@ -43,9 +43,6 @@ const styles = theme => ({
   button: {
     margin: '0 auto',
   },
-  button: {
-    margin: '0 auto',
-  },
   extendedIcon: {
     marginRight: theme.spacing(1),
   },

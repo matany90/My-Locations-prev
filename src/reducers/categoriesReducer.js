@@ -1,6 +1,7 @@
-import { FETCH_CATEGORIES, ADD_CATEGORY, CATEGORY_SLIDER_CHANGED, CATEGORY_TEXT_CHANGED } from '../actions/types';
+import { FETCH_CATEGORIES, ADD_CATEGORY, CATEGORY_SLIDER_CHANGED,
+     CATEGORY_TEXT_CHANGED, REMOVE_CATEGORY_CLICKED, DELETE_CATEGORY } from '../actions/types';
 
-const INITIAL_STATE = {categories: {}, categoryToAdd: '' }
+const INITIAL_STATE = {categories: {}, categoryToAdd: '', isRemoveCategoryClicked: false}
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -12,6 +13,10 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, categoryToAdd: action.payload }
         case CATEGORY_SLIDER_CHANGED:
             return {...state }    
+         case REMOVE_CATEGORY_CLICKED: 
+            return {...state, isRemoveCategoryClicked: !state.isRemoveCategoryClicked}
+         case DELETE_CATEGORY:
+            return {...state, categories: action.payload }      
         default:
             return state;    
 

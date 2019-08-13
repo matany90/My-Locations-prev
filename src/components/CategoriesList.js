@@ -1,67 +1,92 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchCategories } from '../actions';
+import { deleteCategory } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import CardContent from '@material-ui/core/CardContent';
 import _ from 'lodash';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Paper from '@material-ui/core/Paper';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import FolderIcon from '@material-ui/icons/Folder';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class CategoriesList extends Component {
     renderCategories = () => {
-        const { classes, categories } = this.props;
+        const { categories } = this.props;
         if (_.isEmpty(this.props.categories)) {
             return;
         }
-        return _.map(categories, category => {
-            return (
-                <Grid item>
-                    <Card className={classes.card}>
-                        <CardActionArea>
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {category.Name}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-            );
-        });        
+        return _.map(categories, category => (
+                <List>
+                    <Paper style={{maxHeight: 200, overflow: 'auto'}}>
+                    {this.renderListItem(category)}
+                    </Paper>
+                 </List>
+        ))
+    }
+
+    renderListItem(category) {
+        return (
+            <ListItem>
+            <ListItemAvatar>
+                <Avatar>
+                    <FolderIcon />
+                </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+                primary={category.Name}
+            />
+            <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete" 
+                onClick={() => this.props.deleteCategory(category.Name)}
+                >
+                    {this.props.isRemoveCategoryClicked? <DeleteIcon /> : null}
+                </IconButton>
+            </ListItemSecondaryAction>
+        </ListItem>
+        );
     }
 
   render() {
+     const {classes} = this.props;
     return (
-        <div style={{padding: '20px'}}>
-        <Grid container spacing={2} direction="column" alignSelf="center" alignContent="center">
-            <Typography variant="h4" component="h2">
-            <Box letterSpacing={6} m={1} fontStyle="oblique" fontWeight="fontWeightBold">
-            My Categories
-            </Box>
-            </Typography>
+        <Grid
+        style={{ minHeight: '100vh' }} 
+        >
+        <Typography variant="h6" className={classes.title}>
+                My Categories
+        </Typography>
+        <div className={classes.demo}>
             {this.renderCategories()}
-        </Grid>
         </div>
+        </Grid>
     );
   }
 }
 
 const styles = theme => ({
-    card: {
-      maxWidth: 500,
-    },
-    media: {
-      height: 140,
-    },
+    root: {
+        flexGrow: 1,
+      },
+      demo: {
+        backgroundColor: theme.palette.background.paper,
+      },
+      title: {
+        margin: theme.spacing(4, 3, 2),
+      },
   });
 
 const mapStateToProps = (state) => {
-    const {categories} = state.categories;
+    const {categories, isRemoveCategoryClicked} = state.categories;
 
-    return { categories }
+    return { categories, isRemoveCategoryClicked }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(CategoriesList));
+
+export default connect(mapStateToProps, { deleteCategory })(withStyles(styles)(CategoriesList));

@@ -1,5 +1,7 @@
 import {LOCATION_TEXT_CHANGED, ADDRESS_TEXT_CHANGED, CATEGORY_SLIDER_CHANGED,
-     FETCH_LOCATIONS, ADD_LOCATION } from '../actions/types';
+     FETCH_LOCATIONS, ADD_LOCATION, CHECKBOX_CLICKED, LOCATION_FILER_BY_CATEGORY,
+     REMOVE_LOCATION_CLICKED, DELETE_LOCATION }
+      from '../actions/types';
 
  export const fetchLocations = ()  => {
     let locations = localStorage.getItem('locations');
@@ -34,4 +36,25 @@ export const onCategorySliderChanged = (text) => {
     return {
         type: CATEGORY_SLIDER_CHANGED, payload: text
     };
+}
+
+export const onCheckBoxClicked = () => {
+    return {type: CHECKBOX_CLICKED, payload: true }
+}
+
+export const onFilterByCategoryChanged = (text) => {
+    return {type: LOCATION_FILER_BY_CATEGORY, payload: text }
+}
+
+export const onRemoveLocationClick = () => {
+    return {type: REMOVE_LOCATION_CLICKED, payload: true}
+}
+
+export const deleteLocation = (name) => {
+    let locations = localStorage.getItem('locations');
+    locations = locations ? JSON.parse(locations) : {};
+    delete locations[name]
+    localStorage.setItem('locations', JSON.stringify(locations));
+
+    return {type: DELETE_LOCATION, payload: locations};
 }

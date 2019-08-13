@@ -1,8 +1,10 @@
 import { FETCH_LOCATIONS, LOCATION_TEXT_CHANGED,
-     ADDRESS_TEXT_CHANGED, CATEGORY_SLIDER_CHANGED, ADD_LOCATION } from '../actions/types';
+     ADDRESS_TEXT_CHANGED, CATEGORY_SLIDER_CHANGED, ADD_LOCATION, CHECKBOX_CLICKED
+    , LOCATION_FILER_BY_CATEGORY, REMOVE_LOCATION_CLICKED, DELETE_LOCATION } from '../actions/types';
 
 const INITIAL_STATE = {locations: {}, locationName: '', addressName: '',
-         categoryNameChoosed: '', }
+         categoryNameChoosed: '', isCheckBoxClicked: false, filterCategoryValue: '',
+         isRemoveLocationClicked: false}
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -15,7 +17,15 @@ export default (state = INITIAL_STATE, action) => {
         case CATEGORY_SLIDER_CHANGED: 
             return {...state, categoryNameChoosed: action.payload } 
         case ADD_LOCATION:
-            return {...state, locationName: '', addressName: '', categoryNameChoosed: '', locations: action.payload}       
+            return {...state, locationName: '', addressName: '', categoryNameChoosed: '', locations: action.payload}    
+        case CHECKBOX_CLICKED:
+            return {...state, isCheckBoxClicked: !state.isCheckBoxClicked}  
+        case LOCATION_FILER_BY_CATEGORY:
+            return {...state, filterCategoryValue: action.payload}    
+        case REMOVE_LOCATION_CLICKED:
+            return {...state, isRemoveLocationClicked: !state.isRemoveLocationClicked}; 
+        case DELETE_LOCATION:
+            return {...state, locations: action.payload }            
         default:
             return state;    
 
