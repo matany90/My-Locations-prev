@@ -23,7 +23,7 @@ class AddLocation extends Component {
                     id="outlined-name"
                     label="Location Name"
                     className={classes.textField}
-                    value={this.props.locationName}
+                    value={locationName}
                     onChange={event => this.props.onLoctionTextChanged(event.target.value)}
                     margin="normal"
                     variant="outlined"

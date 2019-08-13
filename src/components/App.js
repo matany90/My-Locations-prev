@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { fetchCategories, fetchLocations } from '../actions';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';

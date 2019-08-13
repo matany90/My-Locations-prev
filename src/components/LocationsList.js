@@ -132,9 +132,15 @@ const styles = theme => ({
 const mapStateToProps = (state) => {
     const { locations, isCheckBoxClicked, filterCategoryValue, isRemoveLocationClicked } = state.locations;
     const categoriesNames = Object.keys(state.categories.categories);
-    const orderedLocations = _.orderBy(locations, [location => location.name.toLowerCase()], ['asc']);
+    let orderedLocations = _.orderBy(locations, [location => location.name.toLowerCase()], ['asc']);
 
-    return { orderedLocations, isCheckBoxClicked, categoriesNames, filterCategoryValue, isRemoveLocationClicked };
+    orderedLocations = _.filter(orderedLocations, (val) => {
+      if (val.category === filterCategoryValue || filterCategoryValue === '') {
+        return val.name;
+      }
+    })
+
+    return { orderedLocations, isCheckBoxClicked, categoriesNames, filterCategoryValue, isRemoveLocationClicked };    
 }
 
 export default connect(mapStateToProps, {onCheckBoxClicked, onFilterByCategoryChanged, deleteLocation} )(withStyles(styles)(LocationsList));
