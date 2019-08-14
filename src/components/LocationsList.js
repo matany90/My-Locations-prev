@@ -24,6 +24,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Container from '@material-ui/core/Container';
 import { onCheckBoxClicked, onFilterByCategoryChanged, deleteLocation } from '../actions';
 
 class LocationsList extends Component {
@@ -31,7 +32,12 @@ class LocationsList extends Component {
   renderLocations() {
     const { orderedLocations } = this.props;
     if (_.isEmpty(this.props.orderedLocations)) {
-        return;
+        return(
+          <Typography variant="body1" gutterBottom>
+          Oops! There are no locations that fit your filter or the list of locations is empty.
+          You can add a new location by clicking the Add Location button above
+          </Typography>  
+        );
     }
     return _.map(orderedLocations, location => (
             <List>
@@ -70,6 +76,7 @@ class LocationsList extends Component {
   render() {
     const {classes, isCheckBoxClicked, filterCategoryValue, categoriesNames } = this.props;
     return (
+      <Container fixed >
       <Grid container direction="column">
         <Grid item>
           <Typography variant="h4" gutterBottom>
@@ -112,9 +119,12 @@ class LocationsList extends Component {
           </FormControl>               
         </Grid>
         <Grid item>
+        <Container maxWidth="sm">
         {this.renderLocations()}
+        </Container>
         </Grid>
       </Grid>
+      </Container>
     )
   }
 }

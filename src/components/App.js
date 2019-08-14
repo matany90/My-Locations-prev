@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { fetchCategories, fetchLocations } from '../actions';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
@@ -23,9 +25,10 @@ class App extends Component {
 
     render() {
         //localStorage.clear();
+        const {classes} = this.props;
         return (
                 <BrowserRouter>
-                    <div>
+                <div className={classes.toolbar} />
                         <Header />
                         <Switch>
                         <Route exact path="/" component={Landing} />
@@ -36,11 +39,13 @@ class App extends Component {
                         <Route exact path="/locations/:id" component={LocationListItem} />
                         </Switch>
                         <BottomNav />
-                    </div>
                 </BrowserRouter>
-    
         );
     }
 }
 
-export default connect(null, {fetchCategories, fetchLocations})(App);
+const style = theme => ({
+    toolbar: theme.mixins.toolbar,
+});
+
+export default connect(null, {fetchCategories, fetchLocations})(withStyles(style)(App));

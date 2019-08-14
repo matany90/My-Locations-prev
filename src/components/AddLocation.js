@@ -11,11 +11,96 @@ import { onLoctionTextChanged, onAddressTextChanged, onCategorySliderChanged, ad
 import { connect } from 'react-redux';
 
 class AddLocation extends Component {
-    render() {
+    renderAddPanel = () => {
         const {classes, locationName, addressName, categoriesNames,categoryNameChoosed, coordByDrag } = this.props;
         return (
-                <div>
-                <div>
+        <Grid container direction="column" style={{ width: '30%', height: '100%', paddingBottom: '65px', paddingLeft: '30px' }}>
+        <div style={{ padding: '20px' }}>
+        <Typography variant="h5" component="h2" style={{marginBottom: '20px'}}>
+            Add Location
+         </Typography>
+         <Typography variant="body1" component="h2" style={{margin: '5px'}}>
+         Save your favorite location to your location pool.
+         Drag the map's marker to the correct position
+         </Typography>
+            </div>
+            <TextField
+                id="outlined-name"
+                label="Location Name"
+                className={classes.textField}
+                value={locationName}
+                onChange={event => this.props.onLoctionTextChanged(event.target.value)}
+                margin="normal"
+                variant="outlined"
+            />
+            <TextField
+                id="outlined-name"
+                label="Location Address"
+                className={classes.textField}
+                value={this.props.addressName}
+                onChange={event => this.props.onAddressTextChanged(event.target.value)}
+                margin="normal"
+                variant="outlined"
+            />
+            <TextField
+                id="standard-select-currency"
+                select
+                label="Select"
+                className={classes.textField}
+                value={categoryNameChoosed}
+                onChange={event => this.props.onCategorySliderChanged(event.target.value)}
+                SelectProps={{
+                    MenuProps: {
+                        className: classes.menu,
+                    },
+                }}
+                helperText="Please select category"
+                margin="normal"
+                >
+                {categoriesNames.map(option => (
+                    <MenuItem key={option} value={option}>
+                        {option}
+                    </MenuItem>))}
+            </TextField>
+            <TextField
+                id="outlined-name"
+                label="Latitude"
+                className={classes.textField}
+                value={coordByDrag.lat || 32.085300}
+                onChange={event => console.log('test')}
+                margin="normal"
+                variant="outlined"
+                disabled
+            />
+            <TextField
+                id="outlined-name"
+                label="Longitude"
+                className={classes.textField }
+                value={coordByDrag.lng || 34.781769}
+                onChange={event => console.log('test')}
+                margin="normal"
+                variant="outlined"
+                disabled
+            />
+            <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                disabled={!locationName || !addressName || !categoryNameChoosed}
+                onClick={() =>
+                    this.props.addLocation(locationName, addressName, categoryNameChoosed, coordByDrag ,
+                        () => this.props.history.push('/locations'))}
+            >
+                Submit
+            </Button>
+            </Grid>
+        );
+    }
+
+    render() {
+        return (
+                <Grid container direction="row">
+                <Grid item style={{ width: '70%', height: '100%' }}>
                     <Map
                         style={{ width: '70%', height: '100%' }}
                         google={this.props.google}
@@ -31,87 +116,9 @@ class AddLocation extends Component {
                             onDragend={(t, map, coord) => this.props.onDragendComplete(coord)}                                             
                         />
                     </Map>
-                </div>
-                <Grid container justify="flex-end"
-                  alignItems="flex-end" direction="column"
-                  style={{right: 2}}
-                >
-                <div style={{ padding: '20px' }}>
-                <Typography variant="h4" component="h2">
-                    Add Location
-                 </Typography>
-                    </div>
-                    <TextField
-                        id="outlined-name"
-                        label="Location Name"
-                        className={classes.textField}
-                        value={locationName}
-                        onChange={event => this.props.onLoctionTextChanged(event.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                    <TextField
-                        id="outlined-name"
-                        label="Location Address"
-                        className={classes.textField}
-                        value={this.props.addressName}
-                        onChange={event => this.props.onAddressTextChanged(event.target.value)}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                    <TextField
-                        id="standard-select-currency"
-                        select
-                        label="Select"
-                        className={classes.textField}
-                        value={categoryNameChoosed}
-                        onChange={event => this.props.onCategorySliderChanged(event.target.value)}
-                        SelectProps={{
-                            MenuProps: {
-                                className: classes.menu,
-                            },
-                        }}
-                        helperText="Please select category"
-                        margin="normal"
-                        >
-                        {categoriesNames.map(option => (
-                            <MenuItem key={option} value={option}>
-                                {option}
-                            </MenuItem>))}
-                    </TextField>
-                    <TextField
-                        id="outlined-name"
-                        label="Latitude"
-                        className={classes.textField}
-                        value={coordByDrag.lat || 32.085300}
-                        onChange={event => console.log('test')}
-                        margin="normal"
-                        variant="outlined"
-                        disabled
-                    />
-                    <TextField
-                        id="outlined-name"
-                        label="Longitude"
-                        className={classes.textField }
-                        value={coordByDrag.lng || 34.781769}
-                        onChange={event => console.log('test')}
-                        margin="normal"
-                        variant="outlined"
-                        disabled
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        disabled={!locationName || !addressName || !categoryNameChoosed}
-                        onClick={() =>
-                            this.props.addLocation(locationName, addressName, categoryNameChoosed, coordByDrag ,
-                                () => this.props.history.push('/locations'))}
-                    >
-                        Submit
-                    </Button>
-                    </Grid>
-                    </div>
+                </Grid>
+                {this.renderAddPanel()}
+            </Grid>
         );
     }
 }

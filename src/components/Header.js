@@ -58,7 +58,7 @@ class Header extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="fixed" color="primary" className={classes.appBar}>
               <Toolbar>
                 <Typography variant="h6" className={classes.title}>
                   My Locations
@@ -81,6 +81,10 @@ const styles = theme => ({
     title: {
       flexGrow: 1,
     },
+    appBar: {
+        bottom: 'auto',
+        top: 0,
+      },
   });
 
 export default connect(null, {onRemoveCategoryClick, onRemoveLocationClick})(withRouter(withStyles(styles)(Header)));
