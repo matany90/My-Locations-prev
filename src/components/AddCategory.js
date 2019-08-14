@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
@@ -11,21 +13,20 @@ class AddCategory extends Component {
     render() {
         const { classes, categoryName } = this.props;
         return (
-            <Grid container spacing={1} direction="column" alignContent="center" alignSelf="center">
-            <div className={classes.title}>
-                <Typography variant="h6" component="h2">
-                    Add Category
-                 </Typography>
-            </div>
+            <Grid container direction="column" justify="center" alignContent="center">
+            <DialogContent>
                     <TextField
-                        id="outlined-name"
+                        id="name"
+                        autoFocus
+                        margin="dense"
                         label="Category Name"
+                        type="email"
                         className={classes.textField}
                         value={categoryName}
                         onChange={event => this.props.onCategoryTextChanged(event.target.value)}
-                        margin="normal"
-                        variant="outlined"
                     />
+                    </DialogContent>
+                    <DialogActions className={classes.buttonContainer}>
                     <Button 
                     variant="contained" 
                     color="primary" 
@@ -38,6 +39,7 @@ class AddCategory extends Component {
                     >
                         Submit
                     </Button>
+                    </DialogActions>
             </Grid>
     );
     }
@@ -45,11 +47,17 @@ class AddCategory extends Component {
 
 const styles = theme => ({
     textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
     },
     title: {
         padding:'20px'
+    },
+    button: {
+        width: '10vh'
+    },
+    buttonContainer: {
+        padding: '15px',
     },
   });
 

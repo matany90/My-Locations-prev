@@ -154,7 +154,7 @@ const styles = theme => ({
       width: 200,
     },
     button: {
-        margin: theme.spacing(1),
+        marginTop: '8vh'
       },
   });
 

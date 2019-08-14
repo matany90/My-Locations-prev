@@ -26,7 +26,8 @@ class CategoriesList extends Component {
     renderDialog = () => {
         const {isOpenDialog, classes} = this.props;
         return (
-            <Dialog open={isOpenDialog} classes={{ paper: classes.dialogPaper }}
+            <Dialog open={isOpenDialog}
+             classes={{ paper: classes.dialogPaper }}
             onClose={() => this.props.DialogEvent(false)} aria-labelledby="form-dialog-title">
             <AddCategory />
           </Dialog>
@@ -118,10 +119,6 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
       },
       dialogPaper: {
-        minHeight: '30vh',
-        maxHeight: '30vh',
-        minWidth: '40vh',
-        maxWidth: '40vh',
     },
   });
 

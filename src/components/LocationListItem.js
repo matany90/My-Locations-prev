@@ -30,7 +30,7 @@ class LocationListItem extends Component {
     }
 
     render() {
-        const { location } = this.props;
+        const { location, classes } = this.props;
         return (
             <Grid container direction="row">
                 <Grid item style={{ height: '100%', width: '70%' }}>
@@ -48,7 +48,7 @@ class LocationListItem extends Component {
                 </Grid>
                 <Grid item style={{ height: '100%', width: '30%' , padding: 60}}>
                     {this.renderDescription()}
-                    <img src={TravelerImg} alt="traveler" />
+                    <img src={TravelerImg} alt="traveler" className={classes.imgStyle} />
                 </Grid>
             </Grid>
         ); 
@@ -63,6 +63,9 @@ const style = theme => ({
       media: {
         height: 140,
       },
+      imgStyle: {
+          width: '100%',
+      }
   })
 
 const mapStateToProps = ({locations}, ownProps) => {
