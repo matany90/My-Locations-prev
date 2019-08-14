@@ -24,7 +24,7 @@ class App extends Component {
     }
 
     render() {
-        //localStorage.clear();
+        //localStorage.clear();c
         const {classes} = this.props;
         return (
                 <BrowserRouter>
@@ -34,7 +34,6 @@ class App extends Component {
                         <Route exact path="/" component={LandingPage} />
                         <Route exact path="/categories" component={CategoriesList} />
                         <Route exact path="/locations" component={LocationsList} />
-                        <Route exact path="/categories/addCategory" component={AddCategory} />
                         <Route exact path="/locations/addLocation" component={AddLocation} />
                         <Route exact path="/locations/:id" component={LocationListItem} />
                         </Switch>

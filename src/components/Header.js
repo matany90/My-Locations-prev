@@ -11,7 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import { Link, NavLink  } from 'react-router-dom'; 
 import { connect } from 'react-redux';
-import { onRemoveCategoryClick, onRemoveLocationClick } from '../actions';
+import { onRemoveCategoryClick, onRemoveLocationClick, DialogEvent } from '../actions';
 
 class Header extends Component {
     renderContent = () => {
@@ -23,8 +23,9 @@ class Header extends Component {
                     <Grid container justify="flex-end" alignItems="flex-end">
                         <Button 
                         color="inherit"
-                        component = {Link}
-                        to = "/categories/addCategory"
+                        /*component = {Link}
+                        to = "/categories/addCategory"*/
+                        onClick={() => this.props.DialogEvent(true)}
                         >
                         <AddCircle className={classes.extendedIcon} />
                         Add Category
@@ -104,5 +105,5 @@ const styles = theme => ({
       }
   });
 
-export default connect(null, {onRemoveCategoryClick, onRemoveLocationClick})(withRouter(withStyles(styles)(Header)));
+export default connect(null, {onRemoveCategoryClick, onRemoveLocationClick, DialogEvent})(withRouter(withStyles(styles)(Header)));
 /*export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));*/

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { deleteCategory, onRemoveCategoryClick } from '../actions';
+import { deleteCategory, onRemoveCategoryClick, DialogEvent } from '../actions';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
@@ -17,8 +17,27 @@ import IconButton from '@material-ui/core/IconButton';
 import ListIcon from '@material-ui/icons/List';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TravelersImg from '../res/img/traveler4.png'
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/DialogContentText';
+import Button from '@material-ui/core/Button';
+
+import AddCategory from '../components/AddCategory';
 
 class CategoriesList extends Component {
+
+    renderDialog = () => {
+        const {isOpenDialog, classes} = this.props;
+        return (
+            <Dialog open={isOpenDialog} classes={{ paper: classes.dialogPaper }}
+            onClose={() => this.props.DialogEvent(false)} aria-labelledby="form-dialog-title">
+            <AddCategory />
+          </Dialog>
+        );
+    }
+
     renderCategories = () => {
         const { categories } = this.props;
         if (_.isEmpty(this.props.categories)) {
@@ -26,7 +45,7 @@ class CategoriesList extends Component {
         }
         return _.map(categories, category => (
                 <List>
-                    <Paper style={{maxHeight: 200, overflow: 'auto'}}>
+                    <Paper style={{ maxHeight: 200, overflow: 'auto'}}>
                     {this.renderListItem(category)}
                     </Paper>
                  </List>
@@ -60,6 +79,9 @@ class CategoriesList extends Component {
 
   render() {
      const {classes} = this.props;
+     if (this.props.isOpenDialog) {
+        return this.renderDialog()
+     }
     return (
         <Container fixed>
         <Grid container direction="row" style={{marginTop: '30px'}}>
@@ -93,13 +115,19 @@ const styles = theme => ({
       demo: {
         backgroundColor: theme.palette.background.paper,
       },
+      dialogPaper: {
+        minHeight: '30vh',
+        maxHeight: '30vh',
+        minWidth: '40vh',
+        maxWidth: '40vh',
+    },
   });
 
 const mapStateToProps = (state) => {
-    const {categories, isRemoveCategoryClicked} = state.categories;
+    const {categories, isRemoveCategoryClicked, isOpenDialog} = state.categories;
 
-    return { categories, isRemoveCategoryClicked }
+    return { categories, isRemoveCategoryClicked, isOpenDialog }
 }
 
 
-export default connect(mapStateToProps, { deleteCategory, onRemoveCategoryClick })(withStyles(styles)(CategoriesList));
+export default connect(mapStateToProps, { deleteCategory, onRemoveCategoryClick, DialogEvent })(withStyles(styles)(CategoriesList));

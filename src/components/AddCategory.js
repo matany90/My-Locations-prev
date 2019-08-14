@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import { onCategoryTextChanged, addCategory } from '../actions';
+import { onCategoryTextChanged, addCategory, DialogEvent } from '../actions';
 
 
 class AddCategory extends Component {
@@ -14,7 +14,7 @@ class AddCategory extends Component {
         return (
             <Grid container spacing={1} direction="column" alignContent="center" alignSelf="center">
             <div style= {{padding: '20px'}}>
-                <Typography variant="h4" component="h2">
+                <Typography variant="h6" component="h2">
                     Add Category
                  </Typography>
             </div>
@@ -32,7 +32,10 @@ class AddCategory extends Component {
                     color="primary" 
                     className={classes.button}
                     disabled={!categoryName}
-                    onClick={() => this.props.addCategory(categoryName, () => this.props.history.push('/categories'))}
+                    onClick={() => {
+                        this.props.addCategory(categoryName)
+                        this.props.DialogEvent(false)
+                    }}
                     >
                         Submit
                     </Button>
@@ -58,7 +61,8 @@ const styles = theme => ({
   });
 
   const mapStateToProps = ({categories}) => {
+
       return {categoryName: categories.categoryToAdd};
   }
 
-export default connect(mapStateToProps, {onCategoryTextChanged, addCategory})(withStyles(styles)(AddCategory));
+export default connect(mapStateToProps, {onCategoryTextChanged, addCategory, DialogEvent})(withStyles(styles)(AddCategory));
