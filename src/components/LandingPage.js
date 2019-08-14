@@ -9,7 +9,7 @@ class LandingPage extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <Grid container justify="center" alignItems="center" borderRadius={16} direction="column">
+            <Grid container justify="center" alignItems="center" direction="column">
             <Typography variant="h4" gutterBottom style={{paddingTop: '30px'}}>
             Welcome to MyLocations
             </Typography>

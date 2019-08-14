@@ -3,19 +3,13 @@ import { withStyles } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { fetchCategories, fetchLocations } from '../actions';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import CategoriesList from '../components/CategoriesList';
 import LocationsList from '../components/LocationsList';
-import AddCategory from '../components/AddCategory';
 import AddLocation from '../components/AddLocation';
 import LocationListItem from '../components/LocationListItem';
 import LandingPage from '../components/LandingPage';
-
-const Landing = () => <h2> Landing </h2>
 
 class App extends Component {
     componentDidMount() {

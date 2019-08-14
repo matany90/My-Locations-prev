@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
-import {Map, InfoWindow, Marker, GoogleApiWrapper, Polygon} from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import keys from '../config/keys';
 import { onLoctionTextChanged, onAddressTextChanged, onCategorySliderChanged, addLocation, onDragendComplete } from '../actions';
-import { connect } from 'react-redux';
 
 class AddLocation extends Component {
     renderAddPanel = () => {
@@ -142,7 +142,7 @@ const styles = theme => ({
 const mapStateToProps = ({ locations, categories }) => {
     const { locationName, addressName, categoryNameChoosed, coordByDrag } = locations;
     const categoriesNames = Object.keys(categories.categories);
-    console.log(coordByDrag)
+
     return { locationName, addressName, categoriesNames, categoryNameChoosed, coordByDrag }
 }
 

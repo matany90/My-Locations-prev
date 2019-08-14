@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Input from '@material-ui/core/Input';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -29,7 +26,6 @@ import TravelerImg from '../res/img/traveler2.png'
 import { onCheckBoxClicked, onFilterByCategoryChanged, deleteLocation, onRemoveLocationClick } from '../actions';
 
 class LocationsList extends Component {
-
   renderLocations() {
     const { orderedLocations } = this.props;
     if (_.isEmpty(this.props.orderedLocations)) {
@@ -41,11 +37,13 @@ class LocationsList extends Component {
         );
     }
     return _.map(orderedLocations, location => (
+          <div key={location.name}>
             <List>
                 <Paper style={{maxHeight: 200, overflow: 'auto'}}>
                 {this.renderListItem(location)}
                 </Paper>
              </List>
+          </div>
     ))
   }
 
@@ -78,23 +76,23 @@ class LocationsList extends Component {
 
 
   render() {
-    const {classes, isCheckBoxClicked, filterCategoryValue, categoriesNames } = this.props;
+    const { classes, isCheckBoxClicked, filterCategoryValue, categoriesNames } = this.props;
     return (
       <Container fixed >
-        <Grid container direction="row" style={{marginTop: '30px'}}>
-          <Grid item style={{ width: '50%', height: '100%' }}>
+        <Grid container direction="row" className={classes.root}>
+          <Grid item className={classes.gridItem}>
             <Typography variant="h5" gutterBottom>
               Locations
             </Typography>
             <Typography variant="body1" gutterBottom>
-              View all your favorite Locations! <br /> 
+              View all your favorite Locations! <br />
               You can see all the details about the item by clicking on it.
               The list sorted by alphabetical order. You can also filter by category
           </Typography>
-          <img src={TravelerImg} alt="traveler" style={{paddingTop: '40px'}}/>
+            <img src={TravelerImg} alt="traveler" className={classes.imgStyle} />
           </Grid>
-          <Grid item style={{ width: '50%', height: '100%' }}>
-            <Grid item direction="row" >
+          <Grid item className={classes.gridItem}>
+            <Grid item>
               <Checkbox
                 checked={isCheckBoxClicked}
                 onChange={() => {
@@ -139,8 +137,7 @@ class LocationsList extends Component {
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    marginTop: '30px'
   },
   formControl: {
     margin: theme.spacing(1),
@@ -150,6 +147,13 @@ const styles = theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  gridItem: {
+    width: '50%',
+     height: '100%' 
+  },
+  imgStyle: {
+    paddingTop: '40px' 
+  }
 });
 
 const mapStateToProps = (state) => {

@@ -18,11 +18,6 @@ import ListIcon from '@material-ui/icons/List';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TravelersImg from '../res/img/traveler4.png'
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogContent from '@material-ui/core/DialogContent';
-import TextField from '@material-ui/core/DialogContentText';
-import Button from '@material-ui/core/Button';
 
 import AddCategory from '../components/AddCategory';
 
@@ -44,17 +39,18 @@ class CategoriesList extends Component {
             return;
         }
         return _.map(categories, category => (
+            <div key={category.Name}>
                 <List>
                     <Paper style={{ maxHeight: 200, overflow: 'auto'}}>
                     {this.renderListItem(category)}
                     </Paper>
-                 </List>
+                </List>
+            </div>
         ))
     }
 
-    renderListItem(category) {
-        return (
-            <ListItem>
+    renderListItem = (category) => (
+        <ListItem>
             <ListItemAvatar>
                 <Avatar>
                     <ListIcon />
@@ -64,18 +60,19 @@ class CategoriesList extends Component {
                 primary={category.Name}
             />
             <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete" 
-                onClick={() => {
-                    this.props.deleteCategory(category.Name)
-                    this.props.onRemoveCategoryClick();
-                }}
+                <IconButton edge="end" aria-label="delete"
+                    onClick={() => {
+                        this.props.deleteCategory(category.Name)
+                        this.props.onRemoveCategoryClick();
+                    }}
                 >
-                    {this.props.isRemoveCategoryClicked? <DeleteIcon /> : null}
+                    {this.props.isRemoveCategoryClicked ? <DeleteIcon /> : null}
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>
-        );
-    }
+    )
+
+
 
   render() {
      const {classes} = this.props;
