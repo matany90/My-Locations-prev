@@ -12,7 +12,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import TravelerImg from '../res/img/traveler5.png';
 
 class LocationListItem extends Component {
-
     renderDescription() {
         const { classes, location } = this.props;
         return (
@@ -42,7 +41,6 @@ class LocationListItem extends Component {
                         initialCenter={location.coordByDrag}
                     >
                         <Marker
-                            onMouseover={this.onMouseoverMarker}
                             name={'Current location'}
                             position={location.coordByDrag}
                         />
@@ -50,7 +48,7 @@ class LocationListItem extends Component {
                 </Grid>
                 <Grid item style={{ height: '100%', width: '30%' , padding: 60}}>
                     {this.renderDescription()}
-                    <img src={TravelerImg} alt="traveler" style={{marginRight:'100px'}}/>
+                    <img src={TravelerImg} alt="traveler" />
                 </Grid>
             </Grid>
         ); 

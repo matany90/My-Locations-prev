@@ -22,7 +22,9 @@ class LandingPage extends Component {
             <Typography variant="h6" gutterBottom>
             Collect all your favorite Categories
             </Typography>
+            <div className={classes.bigAvatarContainer}>
             <Avatar alt="Landing Avatar" src={image} className={classes.bigAvatar} />
+            </div>
           </Grid>    
         );
     }
@@ -31,8 +33,12 @@ class LandingPage extends Component {
 const style = theme => ({
       bigAvatar: {
         margin: 10,
-        width: 500,
-        height: 500,
+        width: 400,
+        height: 400,
+      },
+      bigAvatarContainer: {
+        paddingBottom: '10vh',
+        paddingTop: '2vh'
       },
       titleStyle: {
         paddingTop: '30px'

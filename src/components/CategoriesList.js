@@ -36,7 +36,12 @@ class CategoriesList extends Component {
     renderCategories = () => {
         const { categories } = this.props;
         if (_.isEmpty(this.props.categories)) {
-            return;
+            return (
+               <Typography variant="body1" color="textSecondary" component="p">
+               List of categories is empty <br />
+               To add a new category, please click the button above
+               </Typography>     
+            );
         }
         return _.map(categories, category => (
             <div key={category.Name}>
@@ -97,7 +102,7 @@ class CategoriesList extends Component {
                  select one of the categories from your list on the left. <br />
                 You can Add/Remove Categories by clicking the buttons above
         </Typography>
-        <img src={TravelersImg} alt="traveler" style={{paddingTop: '40px', paddingRight:'100px'}}/>
+        <img src={TravelersImg} alt="traveler" style={{paddingTop: '40px', paddingRight:'100px', paddingBottom: '10vh',}}/>
         </Grid>
         </Grid>
         </Container>

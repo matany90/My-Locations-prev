@@ -158,7 +158,8 @@ const styles = theme => ({
      height: '100%' 
   },
   imgStyle: {
-    paddingTop: '40px',
+    paddingTop: '30px',
+    paddingBottom: '10vh',
   },
   emptyList: {
     paddingTop: '10px'
