@@ -12,14 +12,15 @@ import { onLoctionTextChanged, onAddressTextChanged, onCategorySliderChanged, ad
 
 class AddLocation extends Component {
     renderAddPanel = () => {
-        const {classes, locationName, addressName, categoriesNames,categoryNameChoosed, coordByDrag } = this.props;
+        const { classes, locationName, addressName, categoriesNames, categoryNameChoosed,
+             coordByDrag } = this.props;
         return (
-        <Grid container direction="column" style={{ width: '30%', height: '100%', paddingBottom: '65px', paddingLeft: '30px' }}>
-        <div style={{ padding: '20px' }}>
-        <Typography variant="h5" component="h2" style={{marginBottom: '20px'}}>
+        <Grid container direction="column" className={classes.root}>
+        <div className={classes.textContainer}>
+        <Typography variant="h5" component="h2" className={classes.textTitle}>
             Add Location
          </Typography>
-         <Typography variant="body1" component="h2" style={{margin: '5px'}}>
+         <Typography variant="body1" component="h2" className={classes.textContent}>
          Save your favorite location to your location pool.
          Drag the map's marker to the correct position
          </Typography>
@@ -67,7 +68,6 @@ class AddLocation extends Component {
                 label="Latitude"
                 className={classes.textField}
                 value={coordByDrag.lat || 32.085300}
-                onChange={event => console.log('test')}
                 margin="normal"
                 variant="outlined"
                 disabled
@@ -77,7 +77,6 @@ class AddLocation extends Component {
                 label="Longitude"
                 className={classes.textField }
                 value={coordByDrag.lng || 34.781769}
-                onChange={event => console.log('test')}
                 margin="normal"
                 variant="outlined"
                 disabled
@@ -88,7 +87,7 @@ class AddLocation extends Component {
                 className={classes.button}
                 disabled={!locationName || !addressName || !categoryNameChoosed}
                 onClick={() =>
-                    this.props.addLocation(locationName, addressName, categoryNameChoosed, coordByDrag ,
+                    this.props.addLocation(locationName, addressName, categoryNameChoosed, coordByDrag,
                         () => this.props.history.push('/locations'))}
             >
                 Submit
@@ -98,9 +97,10 @@ class AddLocation extends Component {
     }
 
     render() {
+        const { classes } = this.props; 
         return (
                 <Grid container direction="row">
-                <Grid item style={{ width: '70%', height: '100%' }}>
+                <Grid item className={classes.mapContainer}>
                     <Map
                         style={{ width: '70%', height: '100%' }}
                         google={this.props.google}
@@ -124,9 +124,28 @@ class AddLocation extends Component {
 }
 
 const styles = theme => ({
+    root: {
+        width: '30%', 
+        height: '100%', 
+        paddingBottom: '65px', 
+        paddingLeft: '30px' 
+    },
+    mapContainer: {
+        width: '70%',
+        height: '100%'
+    },
+    textContainer: {
+        padding: '20px'
+    },
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
+    },
+    textTitle: {
+        marginBottom: '20px'
+    },
+    textContent: {
+        margin: '5px'
     },
     dense: {
       marginTop: 16,

@@ -18,7 +18,7 @@ class App extends Component {
     }
 
     render() {
-        //localStorage.clear();c
+        //localStorage.clear();
         const {classes} = this.props;
         return (
                 <BrowserRouter>

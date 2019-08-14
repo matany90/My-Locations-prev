@@ -10,7 +10,7 @@ class LandingPage extends Component {
         const { classes } = this.props;
         return (
             <Grid container justify="center" alignItems="center" direction="column">
-            <Typography variant="h4" gutterBottom style={{paddingTop: '30px'}}>
+            <Typography variant="h4" gutterBottom className={classes.titleStyle}>
             Welcome to MyLocations
             </Typography>
             <Typography variant="h6" gutterBottom>
@@ -22,7 +22,7 @@ class LandingPage extends Component {
             <Typography variant="h6" gutterBottom>
             Collect all your favorite Categories
             </Typography>
-            <Avatar alt="Remy Sharp" src={image} className={classes.bigAvatar} />
+            <Avatar alt="Landing Avatar" src={image} className={classes.bigAvatar} />
           </Grid>    
         );
     }
@@ -33,6 +33,9 @@ const style = theme => ({
         margin: 10,
         width: 500,
         height: 500,
+      },
+      titleStyle: {
+        paddingTop: '30px'
       },
 })
 

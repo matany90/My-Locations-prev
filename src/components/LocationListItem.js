@@ -9,33 +9,24 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import image from '../res/img/img1.jpg';
+import TravelerImg from '../res/img/traveler5.png';
 
 class LocationListItem extends Component {
 
-    renderCard() {
+    renderDescription() {
         const { classes, location } = this.props;
         return (
-            <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={image}
-                title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {location.name}
+            <div>
+                <Typography gutterBottom variant="h5" component="h2" >
+                    {location.name}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {`Visit ${location.name}, amazing location you choosed!
+                <Typography variant="body1" color="textSecondary" component="p">
+                    {`Visit ${location.name}, amazing location you choosed!
                     You can see the location of ${location.name} on the map on the left.
                     This location belongs to the category ${location.category}
                     and located at ${location.address}`}
                 </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+            </div>
         );
     }
 
@@ -58,7 +49,8 @@ class LocationListItem extends Component {
                     </Map>
                 </Grid>
                 <Grid item style={{ height: '100%', width: '30%' , padding: 60}}>
-                    {this.renderCard()}
+                    {this.renderDescription()}
+                    <img src={TravelerImg} alt="traveler" style={{marginRight:'100px'}}/>
                 </Grid>
             </Grid>
         ); 

@@ -27,56 +27,92 @@ import { onCheckBoxClicked, onFilterByCategoryChanged, deleteLocation, onRemoveL
 
 class LocationsList extends Component {
   renderLocations() {
-    const { orderedLocations } = this.props;
+    const { orderedLocations, classes } = this.props;
     if (_.isEmpty(this.props.orderedLocations)) {
-        return(
-          <Typography variant="body1" component="p">
+      return (
+        <Typography variant="body1" component="p" color='textSecondary' className={classes.emptyList}>
           Oops! There are no locations that fit your filter or the list of locations is empty.
           You can add a new location by clicking the Add Location button above
-          </Typography>  
-        );
+          </Typography>
+      );
     }
     return _.map(orderedLocations, location => (
-          <div key={location.name}>
-            <List>
-                <Paper style={{maxHeight: 200, overflow: 'auto'}}>
-                {this.renderListItem(location)}
-                </Paper>
-             </List>
-          </div>
+      <div key={location.name}>
+        <List>
+          <Paper style={{ maxHeight: 200, overflow: 'auto' }}>
+            {this.renderListItem(location)}
+          </Paper>
+        </List>
+      </div>
     ))
   }
 
   renderListItem(location) {
-    return ( 
-        <ListItem
+    return (
+      <ListItem
         component={Link} to={`/locations/${location.name}`}
-        >
+      >
         <ListItemAvatar>
-            <Avatar>
-                <MyLocation />
-            </Avatar>
+          <Avatar>
+            <MyLocation />
+          </Avatar>
         </ListItemAvatar>
         <ListItemText
-            primary={location.name}
+          primary={location.name}
         />
         <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="delete" 
+          <IconButton edge="end" aria-label="delete"
             onClick={() => {
               this.props.deleteLocation(location.name)
               this.props.onRemoveLocationClick();
             }}
-            >
-                {this.props.isRemoveLocationClicked? <DeleteIcon /> : null}
-            </IconButton>
+          >
+            {this.props.isRemoveLocationClicked ? <DeleteIcon /> : null}
+          </IconButton>
         </ListItemSecondaryAction>
-    </ListItem>
+      </ListItem>
     );
   }
 
+  renderCategoryFiler = () => {
+    const { classes, isCheckBoxClicked, filterCategoryValue, categoriesNames } = this.props;
+    return (
+      <Grid item>
+        <Checkbox
+          checked={isCheckBoxClicked}
+          onChange={() => {
+            this.props.onCheckBoxClicked();
+            this.props.onFilterByCategoryChanged("");
+          }}
+          value="checkedB"
+          color="primary"
+          inputProps={{
+            'aria-label': 'secondary checkbox',
+          }}
+        />
+        <FormControl className={classes.formControl} disabled={!isCheckBoxClicked}>
+          <InputLabel shrink htmlFor="age-label-placeholder">
+            Category
+          </InputLabel>
+          <Select
+            value={filterCategoryValue}
+            onChange={event => this.props.onFilterByCategoryChanged(event.target.value)}
+            displayEmpty
+            className={classes.selectEmpty}
+          >
+            {categoriesNames.map(option => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>))}
+          </Select>
+          <FormHelperText>Filter by Category</FormHelperText>
+        </FormControl>
+      </Grid>
+    );
+  }
 
   render() {
-    const { classes, isCheckBoxClicked, filterCategoryValue, categoriesNames } = this.props;
+    const { classes } = this.props;
     return (
       <Container fixed >
         <Grid container direction="row" className={classes.root}>
@@ -92,37 +128,7 @@ class LocationsList extends Component {
             <img src={TravelerImg} alt="traveler" className={classes.imgStyle} />
           </Grid>
           <Grid item className={classes.gridItem}>
-            <Grid item>
-              <Checkbox
-                checked={isCheckBoxClicked}
-                onChange={() => {
-                  this.props.onCheckBoxClicked();
-                  this.props.onFilterByCategoryChanged("");
-                }}
-                value="checkedB"
-                color="primary"
-                inputProps={{
-                  'aria-label': 'secondary checkbox',
-                }}
-              />
-              <FormControl className={classes.formControl} disabled={!isCheckBoxClicked}>
-                <InputLabel shrink htmlFor="age-label-placeholder">
-                  Category
-             </InputLabel>
-                <Select
-                  value={filterCategoryValue}
-                  onChange={event => this.props.onFilterByCategoryChanged(event.target.value)}
-                  displayEmpty
-                  className={classes.selectEmpty}
-                >
-                  {categoriesNames.map(option => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>))}
-                </Select>
-                <FormHelperText>Filter by Category</FormHelperText>
-              </FormControl>
-            </Grid>
+          {this.renderCategoryFiler()}
             <Grid item>
               <Container maxWidth="sm">
                 {this.renderLocations()}
@@ -152,8 +158,11 @@ const styles = theme => ({
      height: '100%' 
   },
   imgStyle: {
-    paddingTop: '40px' 
-  }
+    paddingTop: '40px',
+  },
+  emptyList: {
+    paddingTop: '10px'
+  },
 });
 
 const mapStateToProps = (state) => {

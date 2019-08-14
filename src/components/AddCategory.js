@@ -7,13 +7,12 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { onCategoryTextChanged, addCategory, DialogEvent } from '../actions';
 
-
 class AddCategory extends Component {
     render() {
         const { classes, categoryName } = this.props;
         return (
             <Grid container spacing={1} direction="column" alignContent="center" alignSelf="center">
-            <div style= {{padding: '20px'}}>
+            <div className={classes.title}>
                 <Typography variant="h6" component="h2">
                     Add Category
                  </Typography>
@@ -49,15 +48,9 @@ const styles = theme => ({
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
     },
-    dense: {
-      marginTop: 16,
+    title: {
+        padding:'20px'
     },
-    menu: {
-      width: 200,
-    },
-    button: {
-        margin: theme.spacing(1),
-      },
   });
 
   const mapStateToProps = ({categories}) => {

@@ -75,7 +75,7 @@ class CategoriesList extends Component {
 
 
   render() {
-     const {classes} = this.props;
+     const { classes } = this.props;
      if (this.props.isOpenDialog) {
         return this.renderDialog()
      }
