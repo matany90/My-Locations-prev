@@ -23,7 +23,7 @@ class AddLocation extends Component {
          Save your favorite location to your location pool.
          Drag the map's marker to the correct position
          </Typography>
-            </div>
+        </div>
             <TextField
                 id="outlined-name"
                 label="Location Name"

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { deleteCategory } from '../actions';
+import { deleteCategory, onRemoveCategoryClick } from '../actions';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import _ from 'lodash';
@@ -13,7 +14,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import FolderIcon from '@material-ui/icons/Folder';
+import ListIcon from '@material-ui/icons/List';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 class CategoriesList extends Component {
@@ -36,7 +37,7 @@ class CategoriesList extends Component {
             <ListItem>
             <ListItemAvatar>
                 <Avatar>
-                    <FolderIcon />
+                    <ListIcon />
                 </Avatar>
             </ListItemAvatar>
             <ListItemText
@@ -44,7 +45,10 @@ class CategoriesList extends Component {
             />
             <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete" 
-                onClick={() => this.props.deleteCategory(category.Name)}
+                onClick={() => {
+                    this.props.deleteCategory(category.Name)
+                    this.props.onRemoveCategoryClick();
+                }}
                 >
                     {this.props.isRemoveCategoryClicked? <DeleteIcon /> : null}
                 </IconButton>
@@ -56,6 +60,7 @@ class CategoriesList extends Component {
   render() {
      const {classes} = this.props;
     return (
+        <Container maxWidth="sm">
         <Grid
         style={{ minHeight: '100vh' }} 
         >
@@ -65,7 +70,9 @@ class CategoriesList extends Component {
         <div className={classes.demo}>
             {this.renderCategories()}
         </div>
+        
         </Grid>
+        </Container>
     );
   }
 }
@@ -89,4 +96,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { deleteCategory })(withStyles(styles)(CategoriesList));
+export default connect(mapStateToProps, { deleteCategory, onRemoveCategoryClick })(withStyles(styles)(CategoriesList));

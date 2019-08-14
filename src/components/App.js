@@ -13,9 +13,9 @@ import LocationsList from '../components/LocationsList';
 import AddCategory from '../components/AddCategory';
 import AddLocation from '../components/AddLocation';
 import LocationListItem from '../components/LocationListItem';
+import LandingPage from '../components/LandingPage';
 
 const Landing = () => <h2> Landing </h2>
-const Test = () => <h2> Test </h2>
 
 class App extends Component {
     componentDidMount() {
@@ -31,7 +31,7 @@ class App extends Component {
                 <div className={classes.toolbar} />
                         <Header />
                         <Switch>
-                        <Route exact path="/" component={Landing} />
+                        <Route exact path="/" component={LandingPage} />
                         <Route exact path="/categories" component={CategoriesList} />
                         <Route exact path="/locations" component={LocationsList} />
                         <Route exact path="/categories/addCategory" component={AddCategory} />
