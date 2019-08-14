@@ -16,6 +16,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import ListIcon from '@material-ui/icons/List';
 import DeleteIcon from '@material-ui/icons/Delete';
+import TravelersImg from '../res/img/traveler4.png'
 
 class CategoriesList extends Component {
     renderCategories = () => {
@@ -60,17 +61,25 @@ class CategoriesList extends Component {
   render() {
      const {classes} = this.props;
     return (
-        <Container maxWidth="sm">
-        <Grid
-        style={{ minHeight: '100vh' }} 
-        >
-        <Typography variant="h6" className={classes.title}>
-                My Categories
-        </Typography>
+        <Container fixed>
+        <Grid container direction="row" style={{marginTop: '30px'}}>
+        <Grid item style={{ width: '50%', height: '100%' }}>
         <div className={classes.demo}>
             {this.renderCategories()}
         </div>
-        
+        </Grid>
+        <Grid item style={{ width: '50%', height: '100%', paddingLeft:'100px' }}>
+        <Typography variant="h5" gutterBottom>
+                Categories
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+                All your favorite Categories! <br />
+                As you add location to your location list, you'll need to <br />
+                 select one of the categories from your list on the left. <br />
+                You can Add/Remove Categories by clicking the buttons above
+        </Typography>
+        <img src={TravelersImg} alt="traveler" style={{paddingTop: '40px', paddingRight:'100px'}}/>
+        </Grid>
         </Grid>
         </Container>
     );
@@ -83,9 +92,6 @@ const styles = theme => ({
       },
       demo: {
         backgroundColor: theme.palette.background.paper,
-      },
-      title: {
-        margin: theme.spacing(4, 3, 2),
       },
   });
 

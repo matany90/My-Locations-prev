@@ -25,6 +25,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MyLocation from '@material-ui/icons/MyLocation';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Container from '@material-ui/core/Container';
+import TravelerImg from '../res/img/traveler2.png'
 import { onCheckBoxClicked, onFilterByCategoryChanged, deleteLocation, onRemoveLocationClick } from '../actions';
 
 class LocationsList extends Component {
@@ -82,14 +83,15 @@ class LocationsList extends Component {
       <Container fixed >
         <Grid container direction="row" style={{marginTop: '30px'}}>
           <Grid item style={{ width: '50%', height: '100%' }}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h5" gutterBottom>
               Locations
             </Typography>
             <Typography variant="body1" gutterBottom>
               View all your favorite Locations! <br /> 
               You can see all the details about the item by clicking on it.
-              The list order by alphabetical alphabetically. You can also filter by category
+              The list sorted by alphabetical order. You can also filter by category
           </Typography>
+          <img src={TravelerImg} alt="traveler" style={{paddingTop: '40px'}}/>
           </Grid>
           <Grid item style={{ width: '50%', height: '100%' }}>
             <Grid item direction="row" >

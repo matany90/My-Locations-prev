@@ -8,7 +8,8 @@ import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Link } from 'react-router-dom'; 
+import Grid from '@material-ui/core/Grid';
+import { Link, NavLink  } from 'react-router-dom'; 
 import { connect } from 'react-redux';
 import { onRemoveCategoryClick, onRemoveLocationClick } from '../actions';
 
@@ -19,7 +20,7 @@ class Header extends Component {
         switch(path) {
             case "categories":
                 return (
-                    <div>
+                    <Grid container justify="flex-end" alignItems="flex-end">
                         <Button 
                         color="inherit"
                         component = {Link}
@@ -35,11 +36,11 @@ class Header extends Component {
                         <RemoveCircle className={classes.extendedIcon} />
                         Remove Category
                         </Button>
-                    </div>    
+                    </Grid>    
                 );
             case "locations":
             return (
-                <div>
+                <Grid container justify="flex-end" alignItems="flex-end">
                     <Button 
                     color="inherit"
                     component = {Link}
@@ -55,7 +56,7 @@ class Header extends Component {
                     <RemoveCircle className={classes.extendedIcon} />
                     Remove Location
                     </Button>
-                </div>    
+                </Grid>    
             );
             default: 
                 return null;
@@ -68,9 +69,11 @@ class Header extends Component {
             <div className={classes.root}>
             <AppBar position="fixed" color="primary" className={classes.appBar}>
               <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                  My Locations
+                <NavLink to="/" style={{ textDecoration: 'none', color: 'unset' }}>
+                <Typography variant="h6">
+                  MyLocations
                 </Typography>
+                </NavLink>
                 {this.renderContent()}
               </Toolbar>
             </AppBar>
@@ -98,7 +101,6 @@ const styles = theme => ({
       },
       extendedIconHome: {
         marginRight: theme.spacing(1),
-        marginTop: theme.spacing(1),
       }
   });
 
