@@ -22,33 +22,32 @@ import Dialog from '@material-ui/core/Dialog';
 import AddCategory from '../components/AddCategory';
 
 class CategoriesList extends Component {
-
     renderDialog = () => {
-        const {isOpenDialog, classes} = this.props;
+        const { isOpenDialog, classes } = this.props;
         return (
             <Dialog open={isOpenDialog}
-             classes={{ paper: classes.dialogPaper }}
-            onClose={() => this.props.DialogEvent(false)} aria-labelledby="form-dialog-title">
-            <AddCategory />
-          </Dialog>
+                classes={{ paper: classes.dialogPaper }}
+                onClose={() => this.props.DialogEvent(false)} aria-labelledby="form-dialog-title">
+                <AddCategory />
+            </Dialog>
         );
     }
 
     renderCategories = () => {
-        const { categories } = this.props;
+        const { categories, classes } = this.props;
         if (_.isEmpty(this.props.categories)) {
             return (
-               <Typography variant="body1" color="textSecondary" component="p">
-               List of categories is empty <br />
-               To add a new category, please click the button above
-               </Typography>     
+                <Typography variant="body1" color="textSecondary" component="p">
+                    List of categories is empty <br />
+                    To add a new category, please click the button above
+               </Typography>
             );
         }
         return _.map(categories, category => (
             <div key={category.Name}>
                 <List>
-                    <Paper style={{ maxHeight: 200, overflow: 'auto'}}>
-                    {this.renderListItem(category)}
+                    <Paper className={classes.itemStyle}>
+                        {this.renderListItem(category)}
                     </Paper>
                 </List>
             </div>
@@ -78,48 +77,61 @@ class CategoriesList extends Component {
         </ListItem>
     )
 
-
-
-  render() {
-     const { classes } = this.props;
-     if (this.props.isOpenDialog) {
-        return this.renderDialog()
-     }
-    return (
-        <Container fixed>
-        <Grid container direction="row" style={{marginTop: '30px'}}>
-        <Grid item style={{ width: '50%', height: '100%' }}>
-        <div className={classes.demo}>
-            {this.renderCategories()}
-        </div>
-        </Grid>
-        <Grid item style={{ width: '50%', height: '100%', paddingLeft:'100px' }}>
-        <Typography variant="h5" gutterBottom>
-                Categories
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-                All your favorite Categories! <br />
-                As you add location to your location list, you'll need to <br />
-                 select one of the categories from your list on the left. <br />
-                You can Add/Remove Categories by clicking the buttons above
-        </Typography>
-        <img src={TravelersImg} alt="traveler" style={{paddingTop: '40px', paddingRight:'100px', paddingBottom: '10vh',}}/>
-        </Grid>
-        </Grid>
-        </Container>
-    );
-  }
+    render() {
+        const { classes } = this.props;
+        if (this.props.isOpenDialog) {
+            return this.renderDialog()
+        }
+        return (
+            <Container fixed>
+                <Grid container direction="row" className={classes.containerStyle}>
+                    <Grid item className={classes.categoriesContainerStyle}>
+                        <div className={classes.demo}>
+                            {this.renderCategories()}
+                        </div>
+                    </Grid>
+                    <Grid item className={classes.description}>
+                        <Typography variant="h5" gutterBottom>
+                            Categories
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                            All your favorite Categories! <br />
+                            As you add location to your location list, you'll need to <br />
+                            select one of the categories from your list on the left. <br />
+                            You can Add/Remove Categories by clicking the buttons above
+                        </Typography>
+                        <img src={TravelersImg} alt="traveler" className={classes.imgStyle} />
+                    </Grid>
+                </Grid>
+            </Container>
+        );
+    }
 }
 
 const styles = theme => ({
-    root: {
-        flexGrow: 1,
-      },
-      demo: {
-        backgroundColor: theme.palette.background.paper,
-      },
       dialogPaper: {
     },
+    itemStyle: {
+        maxHeight: 200, 
+        overflow: 'auto'
+    },
+    containerStyle: {
+        marginTop: '30px'
+    }, 
+    categoriesContainerStyle: {
+        width: '50%', 
+        height: '100%' 
+    }, 
+    description: {
+        width: '50%', 
+        height: '100%', 
+        paddingLeft:'100px'
+    }, 
+    imgStyle: {
+        paddingTop: '40px',
+        paddingRight:'100px',
+        paddingBottom: '10vh'
+    }
   });
 
 const mapStateToProps = (state) => {

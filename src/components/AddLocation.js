@@ -21,7 +21,7 @@ class AddLocation extends Component {
             Add Location
          </Typography>
          <Typography variant="body1" component="h2" className={classes.textContent}>
-         Save your favorite location to your location pool.
+         Save your favorite location to your location list.
          Drag the map's marker to the correct position
          </Typography>
         </div>
@@ -154,7 +154,7 @@ const styles = theme => ({
       width: 200,
     },
     button: {
-        marginTop: '8vh'
+        marginTop: '10px',
       },
   });
 

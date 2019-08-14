@@ -81,15 +81,6 @@ class Header extends Component {
 }
 
 const styles = theme => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
     appBar: {
         bottom: 'auto',
         top: 0,
@@ -97,10 +88,7 @@ const styles = theme => ({
       extendedIcon: {
         marginRight: theme.spacing(1),
       },
-      extendedIconHome: {
-        marginRight: theme.spacing(1),
-      }
   });
 
 export default connect(null, {onRemoveCategoryClick, onRemoveLocationClick, DialogEvent})(withRouter(withStyles(styles)(Header)));
-/*export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));*/
+

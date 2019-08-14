@@ -5,15 +5,11 @@ import keys from '../config/keys';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import TravelerImg from '../res/img/traveler5.png';
 
 class LocationListItem extends Component {
     renderDescription() {
-        const { classes, location } = this.props;
+        const { location } = this.props;
         return (
             <div>
                 <Typography gutterBottom variant="h5" component="h2" >
@@ -33,7 +29,7 @@ class LocationListItem extends Component {
         const { location, classes } = this.props;
         return (
             <Grid container direction="row">
-                <Grid item style={{ height: '100%', width: '70%' }}>
+                <Grid item className={classes.mapStyle}>
                     <Map
                         google={this.props.google}
                         style={{ height: '100%', width: '70%' }}
@@ -46,7 +42,7 @@ class LocationListItem extends Component {
                         />
                     </Map>
                 </Grid>
-                <Grid item style={{ height: '100%', width: '30%' , padding: 60}}>
+                <Grid item className={classes.description}>
                     {this.renderDescription()}
                     <img src={TravelerImg} alt="traveler" className={classes.imgStyle} />
                 </Grid>
@@ -56,19 +52,21 @@ class LocationListItem extends Component {
 }
 
 const style = theme => ({
-    card: {
-        maxWidth: 345,
-        paddingBottom: '20px'
-      },
-      media: {
-        height: 140,
-      },
       imgStyle: {
           width: '100%',
+      },
+      mapStyle: {
+        height: '100%',
+        width: '70%' 
+      }, 
+      description: {
+        height: '100%', 
+        width: '30%' ,
+        padding: 60
       }
   })
 
-const mapStateToProps = ({locations}, ownProps) => {
+const mapStateToProps = ({ locations }, ownProps) => {
 
     return { location: locations.locations[ownProps.match.params.id] }
 }
