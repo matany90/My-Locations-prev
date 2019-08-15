@@ -18,8 +18,7 @@ class App extends Component {
     }
 
     render() {
-        //localStorage.clear();
-        const {classes} = this.props;
+        const { classes } = this.props;
         return (
                 <BrowserRouter>
                 <div className={classes.toolbar} />
