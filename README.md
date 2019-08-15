@@ -10,4 +10,5 @@ Technologies I used:
 - Google-maps third-party API
 
 
-![alt text](https://imgur.com/5D7kyMy)
+![alt text](https://i.imgur.com/5D7kyMy.jpg)
+
