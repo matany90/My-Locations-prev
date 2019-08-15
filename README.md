@@ -9,6 +9,17 @@ Technologies I used:
 - All data model saved to local storage
 - Google-maps third-party API
 
+## Categories List:
+![alt text](https://imgur.com/mpk2N75.png)
 
-![alt text](https://i.imgur.com/5D7kyMy.jpg)
+## Locations List:
+![alt text](https://imgur.com/a/ZPdksak.png)
+
+## Add Location:
+![alt text](https://imgur.com/a/4HEcHYm.png)
+
+## View Location:
+![alt text](https://imgur.com/fH8glMW.png)
+
+
 
