@@ -13,10 +13,10 @@ Technologies I used:
 ![alt text](https://imgur.com/mpk2N75.png)
 
 ## Locations List:
-![alt text](https://imgur.com/a/ZPdksak.png)
+![alt text](https://i.imgur.com/0nLsMqy.png)
 
 ## Add Location:
-![alt text](https://imgur.com/a/4HEcHYm.png)
+![alt text](https://i.imgur.com/EisPdrF.png)
 
 ## View Location:
 ![alt text](https://imgur.com/fH8glMW.png)
