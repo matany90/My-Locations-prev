@@ -1,14 +1,11 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import image from '../res/img/img2.jpg'
 
-class LandingPage extends Component {
-    render() {
-        const { classes } = this.props;
-        return (
+const LandingPage = ({ classes }) => (
             <Grid container justify="center" alignItems="center" direction="column">
             <Typography variant="h4" gutterBottom className={classes.titleStyle}>
             Welcome to MyLocations
@@ -26,9 +23,7 @@ class LandingPage extends Component {
             <Avatar alt="Landing Avatar" src={image} className={classes.bigAvatar} />
             </div>
           </Grid>    
-        );
-    }
-}
+)
 
 const style = theme => ({
       bigAvatar: {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,10 +7,7 @@ import CategoryIcon from '@material-ui/icons/Category';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { Link } from 'react-router-dom'; 
 
-class BottomNav extends Component {
-    render() {
-        const { classes } = this.props;
-        return (
+const BottomNav = ({ classes }) => (
           <AppBar position="fixed" color="primary" className={classes.appBar}>
             <Toolbar>
               <Button
@@ -32,8 +29,7 @@ class BottomNav extends Component {
                 </Button>
             </Toolbar>
           </AppBar>
-            )}
-}
+       )      
 
 const styles = theme => ({
   appBar: {
